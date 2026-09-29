@@ -1,14 +1,15 @@
-import 'dart:html' as html;
+import 'package:flutter/foundation.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 Future<String> writeAndReadFile({
   required String fileName,
   required String sampleText,
 }) async {
   final storageKey = 'practical_8/$fileName';
-  final storage = html.window.localStorage;
+  final storage = await SharedPreferences.getInstance();
 
-  storage[storageKey] = sampleText;
-  print('Browser local storage key: $storageKey');
+  await storage.setString(storageKey, sampleText);
+  debugPrint('Browser local storage key: $storageKey');
 
-  return storage[storageKey] ?? 'No content found.';
+  return storage.getString(storageKey) ?? 'No content found.';
 }

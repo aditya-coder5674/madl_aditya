@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:flutter/foundation.dart';
 import 'package:path_provider/path_provider.dart';
 
 Future<String> writeAndReadFile({
@@ -9,8 +10,8 @@ Future<String> writeAndReadFile({
   final directory = await getApplicationDocumentsDirectory();
   final file = File('${directory.path}/$fileName');
 
-  print('Application documents directory: ${directory.path}');
-  print('Text file path: ${file.path}');
+  debugPrint('Application documents directory: ${directory.path}');
+  debugPrint('Text file path: ${file.path}');
 
   await file.writeAsString(sampleText);
   return file.readAsString();
