@@ -1,7 +1,6 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
-import 'package:path_provider/path_provider.dart';
+
+import 'storage_service.dart';
 
 void main() {
   runApp(const PracticalEightApp());
@@ -45,14 +44,10 @@ class _FileStoragePageState extends State<FileStoragePage> {
 
   Future<String> _writeAndReadFile() async {
     try {
-      final directory = await getApplicationDocumentsDirectory();
-      final file = File('${directory.path}/$_fileName');
-
-      debugPrint('Application documents directory: ${directory.path}');
-      debugPrint('Text file path: ${file.path}');
-
-      await file.writeAsString(_sampleText);
-      return await file.readAsString();
+      return await writeAndReadFile(
+        fileName: _fileName,
+        sampleText: _sampleText,
+      );
     } catch (error) {
       throw Exception('Could not access the text file: $error');
     }
